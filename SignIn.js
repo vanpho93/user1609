@@ -10,7 +10,17 @@ export class SignIn extends Component {
 
     onSignIn() {
         const { email, password } = this.state;
-        console.log(email, password);
+        fetch('http://localhost:3000/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
+        .then(res => res.json())
+        .then(resJson => console.log(resJson))
+        .catch(err => console.log(err.message));
     }
 
     render() {
