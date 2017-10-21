@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, Alert } from 'react-native';
+import signInApi from '../apis/signIn';
 
 export class SignIn extends Component {
     constructor(props) {
@@ -10,16 +11,11 @@ export class SignIn extends Component {
 
     onSignIn() {
         const { email, password } = this.state;
-        fetch('http://localhost:3000/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json'
-            },
-            body: JSON.stringify({ email, password })
+        signInApi(email, password)
+        .then(resJson => {
+            if(resJson.message) return this.props.navigation.navigate('GoPlay');
+            Alert.alert('Sign in error', resJson.error);
         })
-        .then(res => res.json())
-        .then(resJson => console.log(resJson))
         .catch(err => console.log(err.message));
     }
 
