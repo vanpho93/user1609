@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 
 const Stack = StackNavigator({
   SignIn: { screen: SignIn },
-  GoPlay: { screen: GoPlay }
+  GoPlay: { screen: GoPlay, path: 'user/:name/:email/:phone' }
 }, { headerMode: 'none' });
 
 export default class App extends Component {

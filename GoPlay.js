@@ -3,9 +3,12 @@ import { View, Text, StyleSheet } from 'react-native';
 
 export class GoPlay extends Component {
     render() {
+        const { name, email, phone } = this.props.navigation.state.params;
         return (
             <View style={styles.container}>
-                <Text>GoPlay</Text>
+                <Text style={styles.text}>Email: { email }</Text>
+                <Text style={styles.text}>Name: { name }</Text>
+                <Text style={styles.text}>Phone: { phone }</Text>
             </View>
         );
     }
@@ -17,5 +20,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#FBE27F'
+    },
+    text: {
+        fontSize: 20
     }
 });

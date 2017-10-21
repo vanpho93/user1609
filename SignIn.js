@@ -5,7 +5,7 @@ import signInApi from '../apis/signIn';
 export class SignIn extends Component {
     constructor(props) {
         super(props);
-        this.state = { email: '', password: '' };
+        this.state = { email: 'z@gmail.com', password: '1232456' };
         this.onSignIn = this.onSignIn.bind(this);
     }
 
@@ -13,7 +13,7 @@ export class SignIn extends Component {
         const { email, password } = this.state;
         signInApi(email, password)
         .then(resJson => {
-            if(resJson.message) return this.props.navigation.navigate('GoPlay');
+            if(resJson.message) return this.props.navigation.navigate('GoPlay',resJson);
             Alert.alert('Sign in error', resJson.error);
         })
         .catch(err => console.log(err.message));
@@ -22,13 +22,18 @@ export class SignIn extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TextInput 
+                <TextInput
+                    autoCapitalize="none"
                     placeholder="Email"
                     style={styles.input}
+                    value={this.state.email}
                     onChangeText={email => this.setState({ email })}
                 />
                 <TextInput 
+                    secureTextEntry
+                    autoCapitalize="none"
                     placeholder="Password"
+                    value={this.state.password}
                     style={styles.input}
                     onChangeText={password => this.setState({ password })}
                 />
@@ -70,3 +75,5 @@ const styles = StyleSheet.create({
         color: 'purple'
     }
 });
+
+// email - mahoa(email, key) -> email-xyz
