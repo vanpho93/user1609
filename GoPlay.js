@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import getToken from '../apis/getToken';
+import saveToken from '../apis/saveToken';
 
 export class GoPlay extends Component {
     onShowToken() {
         getToken()
         .then(token => Alert.alert('Token', token))
         .catch(err => Alert.alert('Error', err.message));
+    }
+    onSignOut() {
+        saveToken('')
+        .then(() => this.props.navigation.navigate('SignIn'));
     }
     render() {
         const { name, email, phone } = this.props.navigation.state.params;
@@ -17,6 +22,9 @@ export class GoPlay extends Component {
                 <Text style={styles.text}>Phone: { phone }</Text>
                 <TouchableOpacity onPress={this.onShowToken.bind(this)} style={styles.button}>
                     <Text style={styles.buttonText}>SHOW TOKEN</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={this.onSignOut.bind(this)} style={styles.button}>
+                    <Text style={styles.buttonText}>SIGN OUT</Text>
                 </TouchableOpacity>
             </View>
         );
