@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SignIn } from './SignIn';
 import { GoPlay } from './GoPlay';
+import { Start } from './Start';
 import { StackNavigator } from 'react-navigation';
 
 const Stack = StackNavigator({
@@ -10,6 +11,6 @@ const Stack = StackNavigator({
 
 export default class App extends Component {
   render() {
-    return <Stack />;
+    return <Start />;
   }
 }
